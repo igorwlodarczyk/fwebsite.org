@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'fucking_scraper/home_page1.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inconsolata:wght@300&display=swap" rel="stylesheet" />
+        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
+        <title>👹 fwebsite.org</title>
+    </head>
+    <body>
+        <a href="/" class="logo-link">
+            <img src="{% static 'fwebsite_logo.png' %}" class="logo-img" />
+        </a>
+
+        <div class="container">
+            <div class="my-list">
+                <ul class="sorted_items">
+                    {% for item in sorted_items|slice:":15" %}
+                    <li><a href="{% url 'item_detail' item.slug %}">{{ item.brand }} {{ item.model }}</a></li>
+                    {% endfor %} {% if sorted_items|length > 15 %}
+                    <li>and more...</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="item-row">
+            {% for item in items|dictsort:"percentage_change" %} {% if forloop.counter <= 3 %}
+            <div class="item">
+                <a href="{% url 'item_detail' item.slug %}">
+                    {% if item.image.url %}
+                    <img src="{{ item.image.url }}" alt="{{ item.brand }} {{ item.model }}" width="300px" />
+                    {% else %}
+                    <img src="{% static 'fwebsite_item_.png' %}" alt="{{ item.brand }} {{ item.model }}" width="300px" />
+                    {% endif %}
+                    <div class="item-text">
+                        <span>{{ item.brand }} {{ item.model }}</span>
+                    </div>
+                </a>
+                <div class="item-info">
+                    <span>
+                        Lowest price: {{ item.latest_lowest_price }} {{ item.currency }}
+                        <span style="{% if item.percentage_change < 0 %}color: green;{% elif item.percentage_change > 0 %}color: red;{% endif %}">
+                            ({% if item.percentage_change >= 0 %}+{% endif %}{{ item.percentage_change }}%)
+                        </span>
+                    </span>
+                </div>
+            </div>
+            {% endif %} {% endfor %}
+        </div>
+        <!-- <input id="search-bar" type="text" class="search-input" placeholder="S E A R C H   F O R   A N   I T E M"> -->
+
+        <div class="center2">
+            <a href="{% url 'all_items' %}">ALL ITEMS</a>
+        </div>
+        <div class="center">
+            <a href="https://twitter.com/da_v1per">TWITTER</a> / <a href="https://www.instagram.com/igor_siuuu/">INSTAGRAM</a> /
+            <a href="/about">ABOUT</a>
+        </div>
+        <!--
+<script>
+  $( function() {
+    var availableItems = [
+      {% for item in sorted_items %}
+        {
+          label: "{{ item.brand }} {{ item.model }}",
+          url: "{% url 'item_detail' item.slug %}"
+        },
+      {% endfor %}
+    ];
+    $( "#search-bar" ).autocomplete({
+      source: availableItems,
+      select: function(event, ui) {
+        window.location.href = ui.item.url;
+      }
+    });
+
+    // Clear the input field when the page is refreshed
+    $(window).on('load', function() {
+      $( "#search-bar" ).val("");
+    });
+  } );
+</script>
+-->
+    </body>
+</html>

@@ -1,0 +1,59 @@
+.logo-link {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo-img {
+    display: block;
+    width: 400px;
+    height: auto;
+}
+
+body {
+    font-family: "Inconsolata", monospace;
+}
+
+.item-image {
+    display: block;
+    width: 500px;
+    position: absolute;
+    top: 200px;
+    left: 35%;
+    transform: translateX(-50%);
+}
+
+.brand_model {
+    position: relative;
+    top: 280px;
+    left: calc(35% + 350px);
+    font-size: 24px;
+}
+
+.lowest_price {
+    font-size: 20px !important;
+}
+
+.sizes {
+    margin-top: 20px;
+}
+
+.href1 {
+    text-decoration: none;
+    color: black;
+}
+
+.latest_data {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+}
+
+.scraped_data {
+    margin: 0 auto;
+    position: absolute;
+    transform: translateX(-50%);
+}

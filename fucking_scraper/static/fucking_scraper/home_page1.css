@@ -1,0 +1,161 @@
+.logo-link {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo-img {
+    display: block;
+    width: 400px;
+    height: auto;
+}
+
+.item-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    margin-top: 290px;
+}
+
+.item-row2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    margin-top: 50px;
+}
+
+.item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 450px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.item-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.item-text span {
+    font-weight: bold;
+    color: #333;
+}
+
+.item-text + a {
+    display: block;
+    position: relative;
+    color: #333;
+}
+
+.item img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.item-info {
+    text-align: center;
+}
+body {
+    font-family: "Inconsolata", monospace;
+}
+
+.center a {
+    text-decoration: none;
+    color: black;
+}
+
+.center {
+    position: relative;
+    top: 100px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.center2 a {
+    text-decoration: none;
+    color: black;
+}
+
+.center2 {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+.my-list {
+    position: absolute;
+    top: 300px;
+    left: 50px;
+}
+
+.my-list .sorted_items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.my-list .sorted_items li {
+    color: black;
+    margin-bottom: 10px;
+}
+
+.my-list .sorted_items a {
+    text-decoration: none;
+    color: black;
+}
+
+.search-input {
+    position: relative;
+    top: 5%;
+    left: 50px;
+    font-family: "Cormorant Garamond", serif;
+    border: none;
+    outline: none;
+    font-size: 16px !important;
+    width: 300px;
+    font-weight: bold;
+}
+
+.ui-autocomplete {
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 16px !important;
+    border: none !important;
+    outline: none;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.ui-autocomplete li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.ui-autocomplete .ui-menu-item:hover {
+    background-color: #f2f2f2;
+}
+
+.ui-autocomplete .ui-state-focus {
+    background-color: #f2f2f2;
+    color: #000;
+    border: none;
+    outline: none;
+}

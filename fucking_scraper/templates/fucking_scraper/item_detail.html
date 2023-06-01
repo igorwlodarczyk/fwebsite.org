@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'fucking_scraper/item_detail1.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inconsolata:wght@300&display=swap" rel="stylesheet" />
+        <title>👹 fwebsite.org - {{ item.brand }} {{ item.model }}</title>
+    </head>
+    <body>
+        <a href="/" class="logo-link">
+            <img src="{% static 'fwebsite_logo.png' %}" class="logo-img" />
+        </a>
+
+        <div class="brand_model">
+            <p>{{ item.brand }} {{ item.model }}</p>
+            <span class="lowest_price">
+                Lowest price: {{ item.latest_lowest_price }} {{ item.currency }}
+                <span style="{% if item.percentage_change < 0 %}color: green;{% elif item.percentage_change > 0 %}color: red;{% endif %}">
+                    ({% if item.percentage_change >= 0 %}+{% endif %}{{ item.percentage_change }}%)
+                </span>
+                <p class="sizes">Last updated: {% if item.last_updated %} {{ item.last_updated }} ago{% else %} Never {% endif %}</p>
+                {% if size_records %}
+                <p class="sizes">Available sizes:</p>
+                {% for size_record in size_records %}
+                <p class="single_record">
+                    {{ size_record.size }} - {{ size_record.price }} {{ size_record.currency }}
+                    <a class="href1" href="{{ size_record.item_url }}">({{ size_record.store_name }})</a>
+                </p>
+                {% endfor %} {% else %}
+                <p class="sizes">No available sizes!</p>
+                {% endif %}
+            </span>
+        </div>
+        {% if item.image.url %}
+        <img src="{{ item.image.url }}" class="item-image" width="500px" />
+        {% else %}
+        <img src="{% static 'fwebsite_item_.png' %}" class="item-image" width="500px" />
+        {% endif %}
+    </body>
+</html>
