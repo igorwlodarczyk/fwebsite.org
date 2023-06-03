@@ -350,24 +350,23 @@ def convert_currency(
     return round(input_amount / (currency_rates[from_currency]), 2), to_currency
 
 
-def size_sort_key(size: str) -> int:
+def size_sort_key(record: ScrapedData) -> int:
     """
-    Returns the sorting key for a given size string.
+    Returns the sorting key for a given ScrapedData record's size field.
 
-    :param size: The size string to determine the sorting key for.
+    :param record: The ScrapedData record to determine the sorting key for.
     :return: The sorting key as an integer.
     """
     size_order = {
+        "XXS": -1,
         "XS": 0,
         "S": 1,
         "M": 2,
         "L": 3,
         "XL": 4,
         "XXL": 5,
-        "2XL": 5,
         "XXXL": 6,
-        "3XL": 6,
         "XXXXL": 7,
-        "4XL": 7,
     }
-    return size_order.get(size, 8)
+    return size_order.get(record.size, 8)
+
