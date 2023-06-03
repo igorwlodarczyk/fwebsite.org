@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from common.utils import parse_size
 
 # Create your models here.
 
@@ -35,6 +36,10 @@ class ScrapedData(models.Model):
     date = models.DateTimeField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     url = models.ForeignKey(Url, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        self.size = parse_size(self.size)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return (
