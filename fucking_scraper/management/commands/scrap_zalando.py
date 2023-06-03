@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 from fucking_scraper.models import Url, ScrapedData
-from zalando.scraper import get_data
+from scrapers.zalando.scraper import get_data
 
 
 class Command(BaseCommand):

@@ -1,4 +1,4 @@
-import zalando.constants as const
+from scrapers.zalando import constants as const
 from typing import Union
 
 

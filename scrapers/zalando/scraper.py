@@ -1,10 +1,10 @@
 import logging
 import uuid
-import zalando.constants as const
+from scrapers.zalando import constants as const
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 from common.utils import clear_debug_logs, parse_price
-from zalando.utils import parse_sizes, get_currency
+from scrapers.zalando.utils import parse_sizes, get_currency
 
 
 def get_data(url: str) -> tuple:
