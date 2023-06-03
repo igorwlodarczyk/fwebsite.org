@@ -369,4 +369,3 @@ def size_sort_key(record: ScrapedData) -> int:
         "XXXXL": 7,
     }
     return size_order.get(record.size, 8)
-
