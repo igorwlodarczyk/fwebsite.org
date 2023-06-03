@@ -7,4 +7,4 @@ Version 0.2.0 (2023-06-03)
 
 Version 0.1.0 (2023-06-01)
 --------------------------
-- First official website release with the support for scraping price from Zalando.
+- First official website release with the support for scraping prices from Zalando.
