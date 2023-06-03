@@ -1,6 +1,7 @@
-from pathlib import Path
+import common.constants as const
 import os
 import re
+from pathlib import Path
 
 
 def clear_debug_logs(debug_logs_path=None):
@@ -35,3 +36,15 @@ def parse_price(price: str) -> float:
     price = re.sub(r"[^0-9.,]", "", price)
     price = price.replace(",", ".")
     return float(price)
+
+
+def parse_size(size: str) -> str:
+    """
+    Parses a string representing a size and returns the standardized size value.
+    :param size: A string representing the size.
+    :return: A string representing the standardized size value.
+    """
+    for key in const.size_equivalents.keys():
+        if key == size.upper():
+            return const.size_equivalents[key]
+    return size
