@@ -48,7 +48,6 @@ def parse_size(size: str) -> str:
     :param size: A string representing the size.
     :return: A string representing the standardized size value.
     """
-    size = size.replace(" ", "")
     for key in const.size_equivalents.keys():
         if key == size.upper():
             return const.size_equivalents[key]
