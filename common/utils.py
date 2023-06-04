@@ -1,6 +1,9 @@
 import common.constants as const
 import os
 import re
+import logging
+import uuid
+from datetime import datetime
 from pathlib import Path
 
 
@@ -49,3 +52,30 @@ def parse_size(size: str) -> str:
         if key == size.upper():
             return const.size_equivalents[key]
     return size
+
+
+def get_logger(store_name: str) -> logging.Logger:
+    """
+    Returns a logger object configured with a unique ID and file handler.
+
+    :param store_name: The name of the store.
+    :return: A logger object.
+
+    Example usage:
+    >>> logger = get_logger("my_store")
+    >>> logger.debug("Debug message")
+    >>> logger.info("Info message")
+    """
+    unique_id = str(uuid.uuid4())[:10]
+    logger = logging.getLogger(f"{store_name}__{unique_id}")
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(
+        "%(asctime)s %(levelname)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    log_file_name = (
+        f"log_debug_{datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}__{unique_id}"
+    )
+    file_handler = logging.FileHandler(log_file_name)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    return logger

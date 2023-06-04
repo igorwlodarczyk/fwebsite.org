@@ -1,10 +1,8 @@
-import logging
-import uuid
-from scrapers.zalando import constants as const
+from . import constants as const
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-from common.utils import clear_debug_logs, parse_price
-from scrapers.zalando.utils import parse_sizes, get_currency
+from common.utils import clear_debug_logs, parse_price, get_logger
+from .utils import parse_sizes, get_currency
 
 
 def get_data(url: str) -> tuple:
@@ -32,18 +30,7 @@ def get_data(url: str) -> tuple:
     - Debug logs are cleared after the data retrieval process.
     """
     with sync_playwright() as p:
-        unique_id = str(uuid.uuid4())[:10]
-        logger = logging.getLogger(f"Zalando_scraper__{unique_id}")
-        logger.setLevel(logging.DEBUG)
-        formatter = logging.Formatter(
-            "%(asctime)s %(levelname)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
-        )
-        log_file_name = (
-            f"log_debug_{datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}__{unique_id}"
-        )
-        file_handler = logging.FileHandler(log_file_name)
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
+        logger = get_logger("Zalando")
         logger.debug(f"Start url: {url}")
         try:
             currency = get_currency(url)
