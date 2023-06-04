@@ -1,8 +1,9 @@
 from . import constants as const
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-from common.utils import clear_debug_logs, parse_price, get_logger
-from .utils import parse_sizes, get_currency
+from common.utils import clear_debug_logs, parse_price, get_logger, parse_sizes
+from .utils import get_currency
+from common.constants import user_agent
 
 
 def get_data(url: str) -> tuple:
@@ -36,7 +37,7 @@ def get_data(url: str) -> tuple:
             currency = get_currency(url)
             browser = p.chromium.launch(headless=False)
             context = browser.new_context()
-            context.set_extra_http_headers({"User-Agent": const.user_agent})
+            context.set_extra_http_headers({"User-Agent": user_agent})
             page = context.new_page()
             page.goto(url)
             logger.debug("Trying to accept cookies...")

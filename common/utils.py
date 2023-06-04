@@ -5,6 +5,7 @@ import logging
 import uuid
 from datetime import datetime
 from pathlib import Path
+from typing import Union
 
 
 def clear_debug_logs(debug_logs_path=None):
@@ -79,3 +80,27 @@ def get_logger(store_name: str) -> logging.Logger:
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     return logger
+
+
+def parse_sizes(sizes: Union[str, list]) -> list:
+    """
+    Parses the given sizes and returns a list of parsed sizes.
+
+    :param sizes: A string or a list of sizes to be parsed.
+                  If a string is provided, it will be converted into a list with a single element.
+    :return: A list of parsed sizes.
+
+    The function takes a single size or a list of sizes as input and parses them. If the input is a string,
+    it will be converted into a list with a single element before parsing. The parsing process involves
+    removing any newline characters from each size element. The resulting parsed sizes are stored in a list
+    and returned.
+    """
+    if not isinstance(sizes, list):
+        sizes = [sizes]
+    parsed_sizes = []
+    for size in sizes:
+        if "\n" in size:
+            parsed_sizes.append(size.split("\n")[0])
+        else:
+            parsed_sizes.append(size)
+    return parsed_sizes
