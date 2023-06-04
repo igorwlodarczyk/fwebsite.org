@@ -1,7 +1,7 @@
 from scrapers.end_clothing import constants as const
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-from common.utils import clear_debug_logs, parse_price, get_logger, parse_sizes
+from common.utils import clear_debug_logs, parse_price, get_logger
 from common.constants import user_agent
 from bs4 import BeautifulSoup
 
@@ -33,7 +33,6 @@ def get_data(url: str) -> tuple:
             soup = BeautifulSoup(sizes_element_html, "html.parser")
             sizes = soup.find_all("div", class_=lambda x: x and x.startswith("sc"))
             parsed_sizes = [size.text for size in sizes]
-
             logger.debug("Successfully gotten available sizes!")
             parsed_price = parse_price(price)
             date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
