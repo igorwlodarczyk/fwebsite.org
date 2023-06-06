@@ -9,7 +9,13 @@ class Command(BaseCommand):
             "url", flat=True
         )
         for url in zalando_urls:
-            price, sizes, date, currency = get_data(url)
+            try:
+                price, sizes, date, currency = get_data(url)
+            except Exception:
+                price = None
+                sizes = None
+                date = None
+                currency = None
             if all((price, sizes, date, currency)):
                 item = Url.objects.filter(url=url).first().item
                 scraped_url = Url.objects.filter(url=url).first()
