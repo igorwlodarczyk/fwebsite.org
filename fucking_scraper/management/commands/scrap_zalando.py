@@ -10,12 +10,7 @@ class Command(BaseCommand):
         )
         for url in zalando_urls:
             price, sizes, date, currency = get_data(url)
-            if (
-                price is not None
-                and sizes is not None
-                and date is not None
-                and currency is not None
-            ):
+            if all((price, sizes, date, currency)):
                 item = Url.objects.filter(url=url).first().item
                 scraped_url = Url.objects.filter(url=url).first()
                 for size in sizes:
