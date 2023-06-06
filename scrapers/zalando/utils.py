@@ -1,4 +1,6 @@
 from scrapers.zalando import constants as const
+from common.utils import convert_size_eu_to_us, parse_sizes
+from typing import Union
 
 
 def get_currency(url: str) -> str:
@@ -11,3 +13,15 @@ def get_currency(url: str) -> str:
         if zalando_url in url:
             return const.currency[zalando_url]
     return None
+
+
+def detect_shoe_sizes_and_parse(sizes: Union[list, str]) -> list:
+    sizes = parse_sizes(sizes)
+    parsed_sizes = []
+    try:
+        for size in sizes:
+            parsed_size = convert_size_eu_to_us(float(size))
+            parsed_sizes.append(str(parsed_size))
+        return parsed_sizes
+    except ValueError:
+        return sizes

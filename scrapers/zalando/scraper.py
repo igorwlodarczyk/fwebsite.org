@@ -1,8 +1,8 @@
 from . import constants as const
 from datetime import datetime
 from playwright.sync_api import sync_playwright
-from common.utils import clear_debug_logs, parse_price, get_logger, parse_sizes
-from .utils import get_currency
+from common.utils import clear_debug_logs, parse_price, get_logger
+from .utils import get_currency, detect_shoe_sizes_and_parse
 from common.constants import user_agent
 
 
@@ -82,7 +82,7 @@ def get_data(url: str) -> tuple:
                         logger.debug("It is one size item")
                     finally:
                         parsed_price = parse_price(price)
-                        parsed_sizes = parse_sizes(sizes)
+                        parsed_sizes = detect_shoe_sizes_and_parse(sizes)
                         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         return parsed_price, parsed_sizes, date, currency
         except Exception as e:

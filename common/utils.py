@@ -103,3 +103,44 @@ def parse_sizes(sizes: Union[str, list]) -> list:
         else:
             parsed_sizes.append(size)
     return parsed_sizes
+
+
+def convert_size_uk_to_us(size: Union[float, str]) -> float:
+    """
+    Converts a size from UK measurement to US measurement.
+
+    :param size: The size to be converted. It can be either a float or a string representing a float.
+    :return: The converted size as a float.
+
+    If the input `size` is a string, it is converted to a float before performing the conversion.
+    The conversion involves adding 0.5 to the input size.
+
+    Example:
+    >>> convert_size_uk_to_us(10.5)
+    11.0
+    >>> convert_size_uk_to_us("10.5")
+    11.0
+    """
+
+    if isinstance(size, str):
+        size = float(size)
+    return size + 0.5
+
+
+def convert_size_eu_to_us(size: Union[float, str]) -> float:
+    """
+    Converts a size from EU measurement to US measurement.
+
+    :param size: The size to be converted. It can be either a float or a string representing a float.
+    :return: The converted size as a float.
+
+    If the input `size` is a string, it is converted to a float before performing the conversion.
+    The conversion is based on a size chart that maps EU sizes to corresponding US sizes.
+    If the input `size` is not found in the chart, it is returned as is.
+    """
+    if isinstance(size, str):
+        size = float(size)
+    try:
+        return const.size_chart[size]
+    except KeyError:
+        return size

@@ -15,3 +15,4 @@ Features
 Currently supported websites
 ----------------------------
 - Zalando
+- End clothing
