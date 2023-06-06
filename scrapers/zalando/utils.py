@@ -1,29 +1,6 @@
 from scrapers.zalando import constants as const
+from common.utils import convert_size_eu_to_us, parse_sizes
 from typing import Union
-
-
-def parse_sizes(sizes: Union[str, list]) -> list:
-    """
-    Parses the given sizes and returns a list of parsed sizes.
-
-    :param sizes: A string or a list of sizes to be parsed.
-                  If a string is provided, it will be converted into a list with a single element.
-    :return: A list of parsed sizes.
-
-    The function takes a single size or a list of sizes as input and parses them. If the input is a string,
-    it will be converted into a list with a single element before parsing. The parsing process involves
-    removing any newline characters from each size element. The resulting parsed sizes are stored in a list
-    and returned.
-    """
-    if not isinstance(sizes, list):
-        sizes = [sizes]
-    parsed_sizes = []
-    for size in sizes:
-        if "\n" in size:
-            parsed_sizes.append(size.split("\n")[0])
-        else:
-            parsed_sizes.append(size)
-    return parsed_sizes
 
 
 def get_currency(url: str) -> str:
@@ -36,3 +13,35 @@ def get_currency(url: str) -> str:
         if zalando_url in url:
             return const.currency[zalando_url]
     return None
+
+
+def detect_shoe_sizes_and_parse(sizes: Union[list, str]) -> list:
+    """
+    Detects shoe sizes and parses them from EU measurement to US measurement.
+
+    :param sizes: The sizes to be detected and parsed. It can be either a list of strings or a single string.
+    :return: The parsed sizes as a list of strings.
+
+    If the input `sizes` is a string, it is parsed into a list of sizes using the `parse_sizes` function.
+    Each size in the list is converted from EU measurement to US measurement using the `convert_size_eu_to_us` function.
+    The converted sizes are stored in a new list `parsed_sizes`, which is returned as the result.
+
+    If any error occurs during the conversion (e.g., invalid input size), the original sizes are returned as is.
+
+    Example:
+    >>> detect_shoe_sizes_and_parse(["42.5", "38", "39.5"])
+    ['9.0', '5.0', '6.5']
+    >>> detect_shoe_sizes_and_parse("41.5 37 40")
+    ['8.5', '5.0', '7.0']
+    >>> detect_shoe_sizes_and_parse(["45.5", "abc", "39"])
+    ['11.5', 'abc', '6.0']
+    """
+    sizes = parse_sizes(sizes)
+    parsed_sizes = []
+    try:
+        for size in sizes:
+            parsed_size = convert_size_eu_to_us(float(size))
+            parsed_sizes.append(str(parsed_size))
+        return parsed_sizes
+    except ValueError:
+        return sizes

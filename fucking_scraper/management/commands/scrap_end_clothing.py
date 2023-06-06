@@ -1,14 +1,14 @@
 from django.core.management import BaseCommand
 from fucking_scraper.models import Url, ScrapedData
-from scrapers.zalando.scraper import get_data
+from scrapers.end_clothing.scraper import get_data
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        zalando_urls = Url.objects.filter(store_name__startswith="Zalando").values_list(
-            "url", flat=True
-        )
-        for url in zalando_urls:
+        end_clothing_urls = Url.objects.filter(
+            store_name__exact="endclothing.com"
+        ).values_list("url", flat=True)
+        for url in end_clothing_urls:
             try:
                 price, sizes, date, currency = get_data(url)
             except Exception:

@@ -1,6 +1,5 @@
 timeout = 10000
 currency = {"zalando.pl": "PLN", "zalando.nl": "EUR", "zalando.de": "EUR"}
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36"
 xpath_cookies_button = '//button[@id="uc-btn-accept-banner"]'
 xpath_discounted_price = '//p[@class="KxHAYs _4sa1cA dgII7d _3SrjVh"]'
 xpath_regular_price = '//p[@class="KxHAYs _4sa1cA FxZV-M _4F506m"]'
