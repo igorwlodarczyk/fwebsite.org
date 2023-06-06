@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 0.3.0 (2023-06-03 TBA)
+Version 0.3.0 (2023-06-06)
 --------------------------
 - Added End clothing support.
 
